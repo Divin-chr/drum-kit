@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <p id="title">DRUM KIT</p>
+
+    <audio id="1" src="sounds/crash.mp3"></audio>
+    <audio id="2" src="sounds/kick-bass.mp3"></audio>
+    <audio id="3" src="sounds/snare.mp3"></audio>
+    <audio id="4" src="sounds/tom-1.wav"></audio>
+    <audio id="5" src="sounds/tom-2.wav"></audio>
+    <audio id="6" src="sounds/tom-3.wav"></audio>
+    <audio id="7" src="sounds/tom-4.wav"></audio>
+
+    <div id="keyContainer">
+      <button class="soundButton" id="W">W</button>
+      <button class="soundButton" id="A">A</button>
+      <button class="soundButton" id="S">S</button>
+      <button class="soundButton" id="D">D</button>
+      <button class="soundButton" id="J">J</button>
+      <button class="soundButton" id="K">K</button>
+      <button class="soundButton" id="L">L</button>
+    </div>
+    <script>
+      let keyToAudio = {
+        W: "1",
+        A: "2",
+        S: "3",
+        D: "4",
+        J: "5",
+        K: "6",
+        L: "7",
+      };
+
+      Object.keys(keyToAudio).forEach((key) => {
+        const btn = document.getElementById(key);
+        const audioId = keyToAudio[key];
+        const audio = document.getElementById(audioId);
+
+        btn.addEventListener("click", () => {
+          audio.currentTime = 0; // rewind to start
+          audio.play();
+        });
+      });
+
+      document.addEventListener("keydown", (event) => {
+        const key = event.key.toUpperCase();
+        if (keyToAudio[key]) {
+          const audioId = keyToAudio[key];
+          const audio = document.getElementById(audioId);
+          audio.currentTime = 0; // rewind to start
+          audio.play();
+        }
+      });
+    </script>
+  </body>
+</html>
